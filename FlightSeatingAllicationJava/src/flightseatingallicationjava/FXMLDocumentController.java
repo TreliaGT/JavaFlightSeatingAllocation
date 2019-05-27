@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableView;
 
 /**
  *
@@ -36,20 +37,7 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<?> ClassComboBox;
     @FXML
     private ComboBox<?> SeatTypeCombo;
-    @FXML
-    private TableColumn<?, ?> rows;
-    @FXML
-    private TableColumn<?, ?> A;
-    @FXML
-    private TableColumn<?, ?> B;
-    @FXML
-    private TableColumn<?, ?> C;
-    @FXML
-    private TableColumn<?, ?> D;
-    @FXML
-    private TableColumn<?, ?> E;
-    @FXML
-    private TableColumn<?, ?> F;
+    private TableView<?> tableView;
     
          String plane[][] ={
         {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -65,15 +53,29 @@ public class FXMLDocumentController implements Initializable {
           {"Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
     };
+    @FXML
+    private TableColumn<?, ?> rows;
+    @FXML
+    private TableColumn<?, ?> A;
+    @FXML
+    private TableColumn<?, ?> B;
+    @FXML
+    private TableColumn<?, ?> C;
+    @FXML
+    private TableColumn<?, ?> D;
+    @FXML
+    private TableColumn<?, ?> E;
+    @FXML
+    private TableColumn<?, ?> F;
+
+   
          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ObservableList row = FXCollections.observableArrayList(plane);
 
-            FlightSeatsGrid.setItems(row);
-      
-    
+            tableView.setItems(row);
     }    
 
     @FXML
