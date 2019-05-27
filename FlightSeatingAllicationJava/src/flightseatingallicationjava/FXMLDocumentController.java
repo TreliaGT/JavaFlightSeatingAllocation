@@ -27,7 +27,7 @@ public class FXMLDocumentController implements Initializable {
     
    
     @FXML
-    private TableView<?> FlightSeatsGrid;
+    private TableView<String[][]> FlightSeatsGrid;
     @FXML
     private TextField txtName;
     @FXML
@@ -36,8 +36,22 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<?> ClassComboBox;
     @FXML
     private ComboBox<?> SeatTypeCombo;
- 
-      String plane[][] ={
+    @FXML
+    private TableColumn<?, ?> rows;
+    @FXML
+    private TableColumn<?, ?> A;
+    @FXML
+    private TableColumn<?, ?> B;
+    @FXML
+    private TableColumn<?, ?> C;
+    @FXML
+    private TableColumn<?, ?> D;
+    @FXML
+    private TableColumn<?, ?> E;
+    @FXML
+    private TableColumn<?, ?> F;
+    
+         String plane[][] ={
         {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 3", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -51,7 +65,7 @@ public class FXMLDocumentController implements Initializable {
           {"Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
     };
-      
+         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

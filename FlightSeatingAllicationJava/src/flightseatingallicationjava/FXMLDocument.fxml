@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="691.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="flightseatingallicationjava.FXMLDocumentController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flightseatingallicationjava.FXMLDocumentController">
     <children>
       <TabPane layoutX="8.0" layoutY="8.0" prefHeight="420.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -18,15 +18,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="529.0">
+                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="375.0">
                           <columns>
-                              <TableColumn editable="false" prefWidth="75.0" text="Rows" />
-                            <TableColumn prefWidth="75.0" text="A" />
-                              <TableColumn prefWidth="75.0" text="B" />
-                              <TableColumn prefWidth="75.0" text="C" />
-                              <TableColumn prefWidth="75.0" text="D" />
-                              <TableColumn prefWidth="75.0" text="E" />
-                              <TableColumn prefWidth="75.0" text="F" />
+                              <TableColumn fx:id="rows" editable="false" prefWidth="75.0" text="Rows" />
+                            <TableColumn fx:id="A" prefWidth="50.0" text="A" />
+                              <TableColumn fx:id="B" prefWidth="50.0" text="B" />
+                              <TableColumn fx:id="C" prefWidth="50.0" text="C" />
+                              <TableColumn fx:id="D" prefWidth="50.0" text="D" />
+                              <TableColumn fx:id="E" prefWidth="50.0" text="E" />
+                              <TableColumn fx:id="F" prefWidth="50.0" text="F" />
                           </columns>
                         </TableView>
                         <Button layoutX="584.0" layoutY="21.0" mnemonicParsing="false" onAction="#DeleteSeat_Click" text="Delete" />
