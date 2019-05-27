@@ -18,18 +18,13 @@ import javafx.scene.control.Label;
  */
 public class FXMLDocumentController implements Initializable {
     
-    @FXML
-    private Label label;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+   
+    String plane[][] = new String[12][6]; 
+   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+   
 }
