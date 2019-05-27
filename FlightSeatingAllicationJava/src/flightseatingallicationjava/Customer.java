@@ -13,14 +13,17 @@ public class Customer {
        private String name;
        private String ageGroup;
        private String flightClass;
-       private String perferedSeat;   
+       private String perferedSeat; 
+       private int row;
+       private int col;
 
-       
-    public Customer(String name, String ageGroup, String flightClass, String perferedSeat) {
+    public Customer(String name, String ageGroup, String flightClass, String perferedSeat, int row, int col) {
         this.name = name;
         this.ageGroup = ageGroup;
         this.flightClass = flightClass;
         this.perferedSeat = perferedSeat;
+        this.row = row;
+        this.col = col;
     }
          
     public String getName() {
@@ -53,7 +56,25 @@ public class Customer {
 
     public void setPerferedSeat(String perferedSeat) {
         this.perferedSeat = perferedSeat;
-    }      
+    }    
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+    
+    
 }
 
 
