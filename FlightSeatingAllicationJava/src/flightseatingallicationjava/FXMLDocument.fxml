@@ -18,9 +18,9 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="240.0" prefWidth="529.0">
+                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="529.0">
                           <columns>
-                              <TableColumn prefWidth="75.0" text="Rows" />
+                              <TableColumn editable="false" prefWidth="75.0" text="Rows" />
                             <TableColumn prefWidth="75.0" text="A" />
                               <TableColumn prefWidth="75.0" text="B" />
                               <TableColumn prefWidth="75.0" text="C" />
@@ -29,7 +29,7 @@
                               <TableColumn prefWidth="75.0" text="F" />
                           </columns>
                         </TableView>
-                        <Button layoutX="491.0" layoutY="269.0" mnemonicParsing="false" onAction="#DeleteSeat_Click" text="Delete" />
+                        <Button layoutX="584.0" layoutY="21.0" mnemonicParsing="false" onAction="#DeleteSeat_Click" text="Delete" />
                      </children>
                   </AnchorPane>
             </content>
@@ -51,6 +51,11 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Button layoutX="583.0" layoutY="428.0" mnemonicParsing="false" onAction="#Close_Click" text="Close Program" />
