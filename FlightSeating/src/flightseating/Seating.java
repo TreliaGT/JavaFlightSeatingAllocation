@@ -12,13 +12,13 @@ import javafx.beans.property.SimpleStringProperty;
  * @author V244682
  */
 public class Seating {
-    private SimpleStringProperty rows;
-    private SimpleStringProperty A;
-    private SimpleStringProperty B;
-    private SimpleStringProperty C;
-    private SimpleStringProperty D;
-    private SimpleStringProperty E;
-    private SimpleStringProperty F;
+    private final SimpleStringProperty rows  = new SimpleStringProperty("");;
+    private final SimpleStringProperty A  = new SimpleStringProperty("");;
+    private final SimpleStringProperty B  = new SimpleStringProperty("");;
+    private final SimpleStringProperty C  = new SimpleStringProperty("");;
+    private final SimpleStringProperty D  = new SimpleStringProperty("");;
+    private final SimpleStringProperty E = new SimpleStringProperty("");;
+    private final SimpleStringProperty F  = new SimpleStringProperty("");;
 
     public Seating(String rows, String A, String B, String C, String D, String E, String F) {
          this.rows.set(rows);
@@ -34,7 +34,7 @@ public class Seating {
         return rows;
     }
 
-    public void setRows(String rows) {
+    public final void setRows(String rows) {
          this.rows.set(rows);
     }
     
@@ -46,7 +46,7 @@ public class Seating {
         return A;
     }
 
-    public void setA(String A) {
+    public final void setA(String A) {
         this.A.set(A);
     }
     
@@ -59,7 +59,7 @@ public class Seating {
         return B;
     }
 
-    public void setB(String B) {
+    public final void setB(String B) {
         this.B.set(B);
     }
     
@@ -71,7 +71,7 @@ public class Seating {
         return C;
     }
 
-    public void setC(String C) {
+    public final void setC(String C) {
         this.C.set(C);
     }
     
@@ -82,7 +82,7 @@ public class Seating {
         return D;
     }
 
-    public void setD(String D) {
+    public final void setD(String D) {
         this.D.set(D);
     }
     
@@ -93,7 +93,7 @@ public class Seating {
         return E;
     }
 
-    public void setE(String E) {
+    public final void setE(String E) {
         this.E.set(E);
     }
 
@@ -104,7 +104,7 @@ public class Seating {
         return F;
     }
 
-    public void setF(String F) {
+    public final void setF(String F) {
         this.F.set(F);
     }
 

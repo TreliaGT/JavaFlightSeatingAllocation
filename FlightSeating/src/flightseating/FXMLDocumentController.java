@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,8 +24,7 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
     
-   @FXML
-    private TableView<String[][]> FlightSeatsGrid;
+  
     @FXML
     private TextField txtName;
     @FXML
@@ -35,7 +33,8 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<String> ClassComboBox;
     @FXML
     private ComboBox<String> SeatTypeCombo;
-    private TableView<Seating> tableView;
+    @FXML
+    private TableView<Seating> FlightSeatsGrid;
     @FXML
     private TableColumn<Seating, String> rows;
     @FXML
@@ -72,12 +71,12 @@ public class FXMLDocumentController implements Initializable {
         // TODO
         ArrayList<Seating> list = new ArrayList<>();
 
-       for(int i = 0; i > plane.length; i ++){
+       for(int i = 0; i < 12; i++){
            
-           list.add(new Seating(plane[i][0],plane[i][1], plane[i][2],plane[i][3],plane[i][4],plane[i][5],plane[i][6]));
-       }
-       ObservableList<Seating> list2 = FXCollections.observableArrayList(list);                 
-        tableView.getColumns().addAll(rows, A, B,C,D,E,F);        
+           list.add(new Seating(plane[i][0], plane[i][1], plane[i][2], plane[i][3], plane[i][4], plane[i][5], plane[i][6]));
+          // System.out.println(plane[i][0] + plane[i][1]+ plane[i][2]+ plane[i][3]+ plane[i][4]+ plane[i][5]+ plane[i][6]);
+       } 
+       ObservableList<Seating> list2 = FXCollections.observableArrayList(list);                      
         rows.setCellValueFactory(data -> data.getValue().PropertyRows());
         A.setCellValueFactory(data -> data.getValue().PropertyA());
         B.setCellValueFactory(data -> data.getValue().PropertyB()); 
@@ -85,7 +84,7 @@ public class FXMLDocumentController implements Initializable {
         D.setCellValueFactory(data -> data.getValue().PropertyD()); 
         E.setCellValueFactory(data -> data.getValue().PropertyE()); 
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
-        tableView.setItems(list2);
+        FlightSeatsGrid.setItems(list2);
     }    
 
     @FXML
