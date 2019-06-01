@@ -68,10 +68,29 @@ public class FXMLDocumentController implements Initializable {
          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        ArrayList<Seating> list = new ArrayList<>();
+    setTableView();
+    }    
+    
+    @FXML
+    private void Close_Click(ActionEvent event) {
+       System.exit(0);
+    }
 
-       for(int i = 0; i < 12; i++){
+    @FXML
+    private void DeleteSeat_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void AddCustomer_click(ActionEvent event) {
+    }
+    
+    /***
+     * Adds information to a table view
+     */
+    public void setTableView(){
+              ArrayList<Seating> list = new ArrayList<>();
+
+       for(int i = 0; i < plane.length; i++){
            
            list.add(new Seating(plane[i][0], plane[i][1], plane[i][2], plane[i][3], plane[i][4], plane[i][5], plane[i][6]));
           // System.out.println(plane[i][0] + plane[i][1]+ plane[i][2]+ plane[i][3]+ plane[i][4]+ plane[i][5]+ plane[i][6]);
@@ -85,18 +104,7 @@ public class FXMLDocumentController implements Initializable {
         E.setCellValueFactory(data -> data.getValue().PropertyE()); 
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
         FlightSeatsGrid.setItems(list2);
-    }    
-
-    @FXML
-    private void Close_Click(ActionEvent event) {
+    }
     
-    }
-
-    @FXML
-    private void DeleteSeat_Click(ActionEvent event) {
-    }
-
-    @FXML
-    private void AddCustomer_click(ActionEvent event) {
-    }
+    
 }
