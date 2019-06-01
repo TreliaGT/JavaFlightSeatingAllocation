@@ -12,13 +12,13 @@ import javafx.beans.property.SimpleStringProperty;
  * @author V244682
  */
 public class Seating {
-    private final SimpleStringProperty rows  = new SimpleStringProperty("");;
-    private final SimpleStringProperty A  = new SimpleStringProperty("");;
-    private final SimpleStringProperty B  = new SimpleStringProperty("");;
-    private final SimpleStringProperty C  = new SimpleStringProperty("");;
-    private final SimpleStringProperty D  = new SimpleStringProperty("");;
-    private final SimpleStringProperty E = new SimpleStringProperty("");;
-    private final SimpleStringProperty F  = new SimpleStringProperty("");;
+    private final SimpleStringProperty rows  = new SimpleStringProperty("");
+    private final SimpleStringProperty A  = new SimpleStringProperty("");
+    private final SimpleStringProperty B  = new SimpleStringProperty("");
+    private final SimpleStringProperty C  = new SimpleStringProperty("");
+    private final SimpleStringProperty D  = new SimpleStringProperty("");
+    private final SimpleStringProperty E = new SimpleStringProperty("");
+    private final SimpleStringProperty F  = new SimpleStringProperty("");
 
     public Seating(String rows, String A, String B, String C, String D, String E, String F) {
          this.rows.set(rows);

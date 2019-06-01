@@ -49,6 +49,21 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Seating, String> E;
     @FXML
     private TableColumn<Seating, String> F;
+     @FXML
+    private TableView<Customer> customerlist;
+    @FXML
+    private TableColumn<Customer, String> Names;
+    @FXML
+    private TableColumn<Customer, String> ageGroup;
+    @FXML
+    private TableColumn<Customer, String> flightClass;
+    @FXML
+    private TableColumn<Customer, String> perferedSeat;
+    @FXML
+    private TableColumn<Customer, Integer > row;
+    @FXML
+    private TableColumn<Customer, Integer> col;
+
     String plane[][] ={
         {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -63,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
           {"Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
     };
-
+   
    
          
     @Override
