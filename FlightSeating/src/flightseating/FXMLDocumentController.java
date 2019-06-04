@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,8 +85,13 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     setTableView();
+    setComboBox();
     }    
     
+    /**
+     * Closes the program but also will call the write to file method
+     * @param event 
+     */
     @FXML
     private void Close_Click(ActionEvent event) {
        System.exit(0);
@@ -97,6 +103,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void AddCustomer_click(ActionEvent event) {
+        //JOptionPane.showMessageDialog(null, AgeComboBox.getValue() +  ClassComboBox.getValue() + SeatTypeCombo.getValue());
     }
     
     /***
@@ -120,6 +127,19 @@ public class FXMLDocumentController implements Initializable {
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
         FlightSeatsGrid.setItems(list2);
     }
+    
+    /**
+     * Sets all combo boxes required in this program
+     */
+    public void setComboBox(){
+      String AgeCombo[] = {"Adult" , "Child"};
+      String SeatType[] = {"Window", "Middle", "Aisle"}; 
+      String ClassCombo[] = {"First", "Business", "Economy"};
+      //AgeComboBox.setItems();
+        AgeComboBox.getItems().addAll(AgeCombo);
+        SeatTypeCombo.getItems().addAll(SeatType);
+        ClassComboBox.getItems().addAll(ClassCombo);
+    } 
     
     
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package flightseating;
-
+        
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
