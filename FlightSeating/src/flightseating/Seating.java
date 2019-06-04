@@ -29,6 +29,7 @@ public class Seating {
          this.E.set(E);
          this.F.set(F);
     }
+
     
     public SimpleStringProperty PropertyRows() {
         return rows;

@@ -7,6 +7,9 @@ package flightseating;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,27 +68,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableColumn<Customer, Integer> col;
 
-    String plane[][] ={
-        {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 3", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 4", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 5", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 6", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 7", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 8", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 9", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 10", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
+    Seating plane[][] ={
+          {new Seating("Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 3", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 4", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 5", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 6", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 7", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 8", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 9", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 10", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
+          {new Seating("Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*")},
     };
    
    
          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    setTableView();
-    setComboBox();
+        setTableView();
+        setComboBox();
     }    
     
     /**
@@ -110,13 +113,15 @@ public class FXMLDocumentController implements Initializable {
      * Adds information to a table view
      */
     public void setTableView(){
-              ArrayList<Seating> list = new ArrayList<>();
+        ArrayList<Seating> list = new ArrayList<Seating>();
 
-       for(int i = 0; i < plane.length; i++){
-           
-           list.add(new Seating(plane[i][0], plane[i][1], plane[i][2], plane[i][3], plane[i][4], plane[i][5], plane[i][6]));
-          // System.out.println(plane[i][0] + plane[i][1]+ plane[i][2]+ plane[i][3]+ plane[i][4]+ plane[i][5]+ plane[i][6]);
-       } 
+        for(int i = 0; i < plane.length; i++){
+            list.add(new Seating(plane[i][0].getRows(), plane[i][0].getA(),plane[i][0].getB(),plane[i][0].getC(),plane[i][0].getD(),plane[i][0].getE(),plane[i][0].getF()));
+        }
+        
+         
+        System.out.println(list);
+        
        ObservableList<Seating> list2 = FXCollections.observableArrayList(list);                      
         rows.setCellValueFactory(data -> data.getValue().PropertyRows());
         A.setCellValueFactory(data -> data.getValue().PropertyA());
