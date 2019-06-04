@@ -119,9 +119,6 @@ public class FXMLDocumentController implements Initializable {
             list.add(new Seating(plane[i][0].getRows(), plane[i][0].getA(),plane[i][0].getB(),plane[i][0].getC(),plane[i][0].getD(),plane[i][0].getE(),plane[i][0].getF()));
         }
         
-         
-        System.out.println(list);
-        
        ObservableList<Seating> list2 = FXCollections.observableArrayList(list);                      
         rows.setCellValueFactory(data -> data.getValue().PropertyRows());
         A.setCellValueFactory(data -> data.getValue().PropertyA());
