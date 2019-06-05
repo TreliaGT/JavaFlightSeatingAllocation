@@ -113,7 +113,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void AddCustomer_click(ActionEvent event) {
-        //JOptionPane.showMessageDialog(null, AgeComboBox.getValue() +  ClassComboBox.getValue() + SeatTypeCombo.getValue());
         addCustomer();
     }
     
@@ -156,7 +155,6 @@ public class FXMLDocumentController implements Initializable {
       String AgeCombo[] = {"Adult" , "Child"};
       String SeatType[] = {"Window", "Middle", "Aisle"}; 
       String ClassCombo[] = {"First", "Business", "Economy"};
-      //AgeComboBox.setItems();
         AgeComboBox.getItems().addAll(AgeCombo);
         SeatTypeCombo.getItems().addAll(SeatType);
         ClassComboBox.getItems().addAll(ClassCombo);
@@ -199,6 +197,11 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    /**
+     * Gets the letter of the column then adds the customer
+     * @param j
+     * @param k 
+     */
     public void AddCustomer(int j, int k){
         String A = "none";
           switch(k) {
@@ -227,6 +230,11 @@ public class FXMLDocumentController implements Initializable {
            addSeat(j,k);
         }
         
+    /**
+     * Adds the seat to the plane array
+     * @param j
+     * @param k 
+     */
     public void addSeat(int j, int k){
         if(AgeComboBox.getValue() == "Adult"){
             plane[j][k] = "A"; 
