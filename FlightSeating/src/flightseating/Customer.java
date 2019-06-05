@@ -19,14 +19,18 @@ public class Customer {
        private final SimpleStringProperty perferedSeat = new SimpleStringProperty(""); 
        private final SimpleIntegerProperty row = new SimpleIntegerProperty(0);
        private final SimpleIntegerProperty col = new SimpleIntegerProperty(0);
+        private final SimpleStringProperty RowNum = new SimpleStringProperty("");
+       private final SimpleStringProperty ColLetter = new SimpleStringProperty(""); 
 
-    public Customer(String name, String ageGroup, String flightClass, String perferedSeat, int row, int col) {
+    public Customer(String name, String ageGroup, String flightClass, String perferedSeat, int row, int col, String RowNum, String ColLetter ) {
         this.name.set(name);
         this.ageGroup.set(ageGroup);
         this.flightClass.set(flightClass);
         this.perferedSeat.set(perferedSeat);
         this.row.set(row);
         this.col.set(col);
+        this.RowNum.set(RowNum);
+        this.ColLetter.set(ColLetter);
     }
 
          
@@ -99,7 +103,31 @@ public class Customer {
     
     public int getCol() {
         return col.get();
-    }     
+    }   
+    
+     public SimpleStringProperty PropertyRowNum() {
+        return RowNum;
+    }
+
+    public final void setRowNum(String RowNum) {
+         this.RowNum.set(RowNum);
+    }
+    
+    public String getRowNum() {
+        return RowNum.get();
+    }
+    
+     public SimpleStringProperty PropertyColLetter() {
+        return ColLetter;
+    }
+
+    public final void setColLetter(String ColLetter) {
+         this.ColLetter.set(ColLetter);
+    }
+    
+    public String getColLetter() {
+        return ColLetter.get();
+    }
 }
 
 
