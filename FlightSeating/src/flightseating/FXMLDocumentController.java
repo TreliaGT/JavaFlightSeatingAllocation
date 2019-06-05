@@ -53,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Seating, String> E;
     @FXML
     private TableColumn<Seating, String> F;
-     @FXML
+    @FXML
     private TableView<Customer> customerlist;
     @FXML
     private TableColumn<Customer, String> Names;
@@ -100,6 +100,10 @@ public class FXMLDocumentController implements Initializable {
        System.exit(0);
     }
 
+    /**
+     * Delete customer and removes the seat
+     * @param event 
+     */
     @FXML
     private void DeleteSeat_Click(ActionEvent event) {
        int I = customerlist.getSelectionModel().getSelectedIndex();
@@ -111,6 +115,10 @@ public class FXMLDocumentController implements Initializable {
          setCustomerTableView();
     }
 
+    /**
+     * redirect to add customer method
+     * @param event 
+     */
     @FXML
     private void AddCustomer_click(ActionEvent event) {
         addCustomer();

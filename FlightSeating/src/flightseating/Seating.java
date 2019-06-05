@@ -30,7 +30,7 @@ public class Seating {
          this.F.set(F);
     }
 
-    
+    //Setters and getters
     public SimpleStringProperty PropertyRows() {
         return rows;
     }

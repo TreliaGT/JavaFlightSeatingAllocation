@@ -17,10 +17,10 @@ public class Customer {
        private final SimpleStringProperty ageGroup = new SimpleStringProperty("");
        private final SimpleStringProperty flightClass = new SimpleStringProperty("");
        private final SimpleStringProperty perferedSeat = new SimpleStringProperty(""); 
-       private final SimpleIntegerProperty row = new SimpleIntegerProperty(0);
-       private final SimpleIntegerProperty col = new SimpleIntegerProperty(0);
-        private final SimpleStringProperty RowNum = new SimpleStringProperty("");
-       private final SimpleStringProperty ColLetter = new SimpleStringProperty(""); 
+       private final SimpleIntegerProperty row = new SimpleIntegerProperty(0); //has the number for the array
+       private final SimpleIntegerProperty col = new SimpleIntegerProperty(0);//has the number for the array
+       private final SimpleStringProperty RowNum = new SimpleStringProperty(""); //user display
+       private final SimpleStringProperty ColLetter = new SimpleStringProperty(""); //user display
 
     public Customer(String name, String ageGroup, String flightClass, String perferedSeat, int row, int col, String RowNum, String ColLetter ) {
         this.name.set(name);
@@ -33,7 +33,7 @@ public class Customer {
         this.ColLetter.set(ColLetter);
     }
 
-         
+        //Setters and getters  
     public SimpleStringProperty PropertyName() {
         return name;
     }
