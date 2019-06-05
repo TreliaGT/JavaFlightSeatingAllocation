@@ -102,6 +102,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void DeleteSeat_Click(ActionEvent event) {
+       int I = customerlist.getSelectionModel().getSelectedIndex();
+       int col = Customer.get(I).getCol();
+       int row = Customer.get(I).getRow();
+         plane[row][col] = "*";
+         Customer.remove(I);
+         setTableView();
+         setCustomerTableView();
     }
 
     @FXML
