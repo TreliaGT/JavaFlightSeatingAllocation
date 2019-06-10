@@ -5,6 +5,12 @@
  */
 package flightseating;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
+import flightseating.Customer;
 
 /**
  *
@@ -83,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
           {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
     };
    
-    ArrayList<Customer> Customer = new ArrayList<Customer>();
+    ArrayList<Customer> customer = new ArrayList<Customer>();
          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,6 +104,26 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void Close_Click(ActionEvent event) {
+     try {
+       FileOutputStream fos = new FileOutputStream("Customer.dat");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(customer);
+        oos.close();
+          JOptionPane.showMessageDialog(null, "saved data customer");
+      } catch (IOException i) {
+         JOptionPane.showMessageDialog(null, "Error saving customer");
+      }
+        try {
+         FileOutputStream fileOut =
+         new FileOutputStream("Seating.dat");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(plane);
+         out.close();
+         fileOut.close();
+          JOptionPane.showMessageDialog(null, "saved data seating");
+      } catch (IOException i) {
+         JOptionPane.showMessageDialog(null, "Error with saving seating");
+      }
        System.exit(0);
     }
 
@@ -107,10 +134,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void DeleteSeat_Click(ActionEvent event) {
        int I = customerlist.getSelectionModel().getSelectedIndex();
-       int col = Customer.get(I).getCol();
-       int row = Customer.get(I).getRow();
+       int col = customer.get(I).getCol();
+       int row = customer.get(I).getRow();
          plane[row][col] = "*";
-         Customer.remove(I);
+         customer.remove(I);
          setTableView();
          setCustomerTableView();
     }
@@ -144,10 +171,12 @@ public class FXMLDocumentController implements Initializable {
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
         FlightSeatsGrid.setItems(list2);
     }
-    
+    /**
+     * Sets the customer table view()
+     */
     public void setCustomerTableView(){
-          ObservableList<Customer> person = FXCollections.observableArrayList(Customer);
-              Names.setCellValueFactory(data -> data.getValue().PropertyName());
+          ObservableList<Customer> person = FXCollections.observableArrayList(customer);
+         Names.setCellValueFactory(data -> data.getValue().PropertyName());
         ageGroup.setCellValueFactory(data -> data.getValue().PropertyAgeGroup());
         flightClass.setCellValueFactory(data -> data.getValue().PropertyFlightClass());
         perferedSeat.setCellValueFactory(data -> data.getValue().PropertyPerferedSeat());
@@ -234,7 +263,7 @@ public class FXMLDocumentController implements Initializable {
         default:
             JOptionPane.showMessageDialog(null,"Error");
         }
-          Customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
+          customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
            addSeat(j,k);
         }
         

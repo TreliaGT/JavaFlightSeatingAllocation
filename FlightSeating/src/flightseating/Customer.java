@@ -5,6 +5,7 @@
  */
 package flightseating;
         
+import java.io.Serializable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -12,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Trelia
  */
-public class Customer {
+public class Customer implements Serializable {
        private final SimpleStringProperty name = new SimpleStringProperty("");
        private final SimpleStringProperty ageGroup = new SimpleStringProperty("");
        private final SimpleStringProperty flightClass = new SimpleStringProperty("");
@@ -32,6 +33,8 @@ public class Customer {
         this.RowNum.set(RowNum);
         this.ColLetter.set(ColLetter);
     }
+
+  
 
         //Setters and getters  
     public SimpleStringProperty PropertyName() {
