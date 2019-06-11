@@ -28,6 +28,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import flightseating.Customer;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -74,8 +82,8 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Customer, String > row;
     @FXML
     private TableColumn<Customer, String> col;
-
-    String plane[][] ={
+String plane[][] = new String[12][6] ;
+   /* String plane[][] ={
           {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 3", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -88,14 +96,19 @@ public class FXMLDocumentController implements Initializable {
           {"Row 10", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 11", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 12", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
-    };
+    };*/
    
     ArrayList<Customer> customer = new ArrayList<Customer>();
-         
+          ObservableList<Customer> person;
+          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setTableView();
-        setComboBox();
+          ReadCustomer();
+            ReadSeating();
+            setCustomerTableView();
+            setTableView();
+            setComboBox();
+     
     }    
     
     /**
@@ -104,29 +117,11 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void Close_Click(ActionEvent event) {
-     try {
-       FileOutputStream fos = new FileOutputStream("Customer.dat");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(customer);
-        oos.close();
-          JOptionPane.showMessageDialog(null, "saved data customer");
-      } catch (IOException i) {
-         JOptionPane.showMessageDialog(null, "Error saving customer");
-      }
-        try {
-         FileOutputStream fileOut =
-         new FileOutputStream("Seating.dat");
-         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-         out.writeObject(plane);
-         out.close();
-         fileOut.close();
-          JOptionPane.showMessageDialog(null, "saved data seating");
-      } catch (IOException i) {
-         JOptionPane.showMessageDialog(null, "Error with saving seating");
-      }
+     writeCustomer();
+     writeSeating();
        System.exit(0);
     }
-
+    
     /**
      * Delete customer and removes the seat
      * @param event 
@@ -265,6 +260,7 @@ public class FXMLDocumentController implements Initializable {
         }
           customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
            addSeat(j,k);
+   
         }
         
     /**
@@ -282,5 +278,83 @@ public class FXMLDocumentController implements Initializable {
         setCustomerTableView();
     }
     
+    public void ReadCustomer(){
+      try{
+    BufferedReader in = new BufferedReader(new FileReader("Customer.txt"));
+    String s;
+
+    while((s = in.readLine()) != null){
+
+        String[] var = s.split(",");
+         customer.add(new Customer(var[0], var[1],var[2], var[3], Integer.parseInt(var[4]), Integer.parseInt(var[5]),var[6],var[7]));
+    }
+    in.close();
+    }catch(IOException  e){
+    JOptionPane.showMessageDialog(null, "couldn't read customer");
+    }
+    }
+    /**
+     * Reads the seating file
+     */
+    public void ReadSeating() {
+           try{
+    BufferedReader in = new BufferedReader(new FileReader("Seating.txt"));
+    String s;
+    int i = 0;
+    while((s = in.readLine()) != null){
+       String[] var = s.split(",");
+       plane[i][0] = var[0];
+       plane[i][1] = var[1];
+       plane[i][2] = var[2];
+       plane[i][3] = var[3];
+       plane[i][4] = var[4];
+       plane[i][5] = var[5];
+       plane[i][6] = var[6];
+       i++;
+      }  
+    
+in.close();
+    }catch(IOException e){
+    JOptionPane.showMessageDialog(null, "couldn't read customer");
+    }
+    }
+    
+    /**
+     * Writes customer list to file
+     */
+    public void writeCustomer(){
+         try {
+        FileWriter fileWriter = new FileWriter("Customer.txt");
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        for (Customer item : customer){
+         bufferedWriter.write(item.getName() + "," + item.getAgeGroup() + "," + item.getFlightClass() + "," + item.getPerferedSeat()
+         + "," + item.getRow() + "," + item.getCol() + "," + item.getRowNum() + "," + item.getColLetter());
+         bufferedWriter.newLine();
+        }
+         bufferedWriter.close();
+          JOptionPane.showMessageDialog(null, "saved data customer");
+      } catch (IOException i) {
+         JOptionPane.showMessageDialog(null, "Error saving customer");
+      }
+    }
+    
   
+    /**
+     * Writes Seating list to file
+     */
+    public void writeSeating(){
+          try {
+       FileWriter fileWriter = new FileWriter("Seating.txt");
+         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+              for (String[] plane1 : plane) {
+                  bufferedWriter.write(plane1[0] + "," + plane1[1] + "," + plane1[2] + "," + plane1[3] + "," + plane1[4] + "," + plane1[5] + "," + plane1[6]);
+                  bufferedWriter.newLine();
+              }
+          bufferedWriter.close();
+          JOptionPane.showMessageDialog(null, "saved data seating");
+      } catch (IOException i) {
+         JOptionPane.showMessageDialog(null, "Error with saving seating");
+      }
+    }
+    
 }
