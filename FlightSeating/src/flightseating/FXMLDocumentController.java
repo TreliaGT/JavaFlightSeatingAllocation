@@ -155,7 +155,7 @@ String plane[][];
        int row = customer.get(I).getRow();
          plane[row][col] = "*";
          customer.remove(I);
-         writeToRandomAccessFile("Customer.txt", I, ""); 
+         
          setTableView();
          setCustomerTableView();
     }
