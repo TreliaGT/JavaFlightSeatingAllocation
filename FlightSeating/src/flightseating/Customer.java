@@ -131,6 +131,11 @@ public class Customer implements Serializable {
     public String getColLetter() {
         return ColLetter.get();
     }
+    
+    public String getData(){
+        return getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
+                Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
+    }
 }
 
 

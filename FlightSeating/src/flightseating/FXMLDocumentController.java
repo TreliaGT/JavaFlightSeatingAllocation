@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.ObjectInputStream;
+import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,8 +83,8 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Customer, String > row;
     @FXML
     private TableColumn<Customer, String> col;
-String plane[][] = new String[12][6] ;
-   /* String plane[][] ={
+String plane[][];
+ /* String plane[][] ={
           {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 2", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
           {"Row 3", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -103,13 +104,34 @@ String plane[][] = new String[12][6] ;
           
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          ReadCustomer();
-            ReadSeating();
-            setCustomerTableView();
+        //WriteAllPlane();
+          makePlaneFromFile();
+         makeCustomerFromFile();
+           setCustomerTableView();
             setTableView();
             setComboBox();
      
-    }    
+    }  
+    
+    public void makePlaneFromFile(){
+               String fromfile = readFromRandomAccessFile("seating.txt", 0);
+            String[] seat = fromfile.split(",");
+          String seats[][] = {
+              {seat[0], seat[1], seat[2], seat[3], seat[4], seat[5],seat[6]}, //1
+              {seat[7], seat[8], seat[9], seat[10], seat[11], seat[12],seat[13]},//2
+              {seat[14], seat[15], seat[16], seat[17], seat[18], seat[19],seat[20]},//3
+              {seat[21], seat[22], seat[23], seat[24], seat[25], seat[26],seat[27]},//4
+              {seat[28], seat[29], seat[30], seat[31], seat[32], seat[33],seat[34]},//5
+              {seat[35], seat[36], seat[37], seat[38], seat[39], seat[40],seat[41]},//6
+              {seat[42], seat[43], seat[44], seat[45], seat[46], seat[47],seat[48]},//7
+              {seat[49], seat[50], seat[51], seat[52], seat[53], seat[54],seat[55]},//8
+              {seat[56], seat[57], seat[58], seat[59], seat[60], seat[61],seat[62]},//9
+              {seat[63], seat[64], seat[65], seat[66], seat[67], seat[68],seat[69]},//10
+              {seat[70], seat[71], seat[72], seat[73], seat[74], seat[75],seat[76]},//11
+              {seat[77], seat[78], seat[79], seat[80], seat[81], seat[82],seat[83]},//12
+          };
+        plane = seats;
+    }
     
     /**
      * Closes the program but also will call the write to file method
@@ -117,8 +139,8 @@ String plane[][] = new String[12][6] ;
      */
     @FXML
     private void Close_Click(ActionEvent event) {
-     writeCustomer();
-     writeSeating();
+    //writeToRandomAccessFile("Customer.txt", 0, );
+   // writeToRandomAccessFile("Seating.txt", 0, );
        System.exit(0);
     }
     
@@ -133,6 +155,7 @@ String plane[][] = new String[12][6] ;
        int row = customer.get(I).getRow();
          plane[row][col] = "*";
          customer.remove(I);
+         writeToRandomAccessFile("Customer.txt", I, ""); 
          setTableView();
          setCustomerTableView();
     }
@@ -166,10 +189,20 @@ String plane[][] = new String[12][6] ;
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
         FlightSeatsGrid.setItems(list2);
     }
+    public void makeCustomerFromFile(){
+         String fromfile = readFromRandomAccessFile("Customer.txt", 0);
+            String[] seat = fromfile.split(",");
+            int length = seat.length / 8;
+             for (int i=0; i < length; i++)
+             {
+                   customer.add(new Customer(seat[i], seat[i+1], seat[i+2] , seat[i+3],Integer.parseInt(seat[i+4]), Integer.parseInt(seat[i+5]), seat[i+6] , seat[i+7]));
+             }
+    }
     /**
      * Sets the customer table view()
      */
     public void setCustomerTableView(){
+       
           ObservableList<Customer> person = FXCollections.observableArrayList(customer);
          Names.setCellValueFactory(data -> data.getValue().PropertyName());
         ageGroup.setCellValueFactory(data -> data.getValue().PropertyAgeGroup());
@@ -216,11 +249,11 @@ String plane[][] = new String[12][6] ;
      * @param k
      */
     public void getSeat(int j, int k){
-        for (int i = 0; i < plane.length; i++){
-            if(plane[i][j] == "*"){
+        for (int i = 1; i < plane.length; i++){
+            if("*".equals(plane[i][j])){
                  AddCustomer(i,j);
                  break;
-            }else if(plane[i][k] == "*"){
+            }else if("*".equals(plane[i][k])){
               AddCustomer(i,k);
                  break;
             }else{
@@ -259,8 +292,11 @@ String plane[][] = new String[12][6] ;
             JOptionPane.showMessageDialog(null,"Error");
         }
           customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
+          //   JOptionPane.showMessageDialog(null,customer.get(0).getData());
+         
+           appendToRandomAccessFile("Customer.txt", customer.get(0).getData());
+           
            addSeat(j,k);
-   
         }
         
     /**
@@ -271,90 +307,84 @@ String plane[][] = new String[12][6] ;
     public void addSeat(int j, int k){
         if(AgeComboBox.getValue() == "Adult"){
             plane[j][k] = "A"; 
+           // writeToRandomAccessFile("seating.txt", int position, A)
         }else{
-            plane[j][k] = "C"; 
+            plane[j][k] = "C";
+          //  writeToRandomAccessFile("seating.txt", int position, "C")
         }
         setTableView();
         setCustomerTableView();
     }
-    
-    public void ReadCustomer(){
-      try{
-    BufferedReader in = new BufferedReader(new FileReader("Customer.txt"));
-    String s;
-
-    while((s = in.readLine()) != null){
-
-        String[] var = s.split(",");
-         customer.add(new Customer(var[0], var[1],var[2], var[3], Integer.parseInt(var[4]), Integer.parseInt(var[5]),var[6],var[7]));
-    }
-    in.close();
-    }catch(IOException  e){
-    JOptionPane.showMessageDialog(null, "couldn't read customer");
-    }
-    }
-    /**
-     * Reads the seating file
-     */
-    public void ReadSeating() {
-           try{
-    BufferedReader in = new BufferedReader(new FileReader("Seating.txt"));
-    String s;
-    int i = 0;
-    while((s = in.readLine()) != null){
-       String[] var = s.split(",");
-       plane[i][0] = var[0];
-       plane[i][1] = var[1];
-       plane[i][2] = var[2];
-       plane[i][3] = var[3];
-       plane[i][4] = var[4];
-       plane[i][5] = var[5];
-       plane[i][6] = var[6];
-       i++;
-      }  
-    
-in.close();
-    }catch(IOException e){
-    JOptionPane.showMessageDialog(null, "couldn't read customer");
-    }
-    }
-    
+   
     /**
      * Writes customer list to file
+     * @param file
+     * @param position
+     * @return 
      */
-    public void writeCustomer(){
-         try {
-        FileWriter fileWriter = new FileWriter("Customer.txt");
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        for (Customer item : customer){
-         bufferedWriter.write(item.getName() + "," + item.getAgeGroup() + "," + item.getFlightClass() + "," + item.getPerferedSeat()
-         + "," + item.getRow() + "," + item.getCol() + "," + item.getRowNum() + "," + item.getColLetter());
-         bufferedWriter.newLine();
-        }
-         bufferedWriter.close();
-          JOptionPane.showMessageDialog(null, "saved data customer");
-      } catch (IOException i) {
-         JOptionPane.showMessageDialog(null, "Error saving customer");
-      }
-    }
-    
-  
+    public String readFromRandomAccessFile(String file,int position) {
+        String record = null; 
+		try { 
+			RandomAccessFile fileStore = new RandomAccessFile(file, "r"); // read mode
+			// moves file pointer to position specified 
+			fileStore.seek(position); 
+			// read String from RandomAccessFile 
+			//record = fileStore.readUTF(); 
+			//record = fileStore.readLine();
+                       record = fileStore.readLine();
+			fileStore.close(); 
+			} catch (IOException e) { 
+				JOptionPane.showMessageDialog(null,"Error with reading file"); 
+			} 
+		return record; 
+} 
     /**
-     * Writes Seating list to file
+     * writes all of the planes data
      */
-    public void writeSeating(){
-          try {
-       FileWriter fileWriter = new FileWriter("Seating.txt");
-         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-              for (String[] plane1 : plane) {
-                  bufferedWriter.write(plane1[0] + "," + plane1[1] + "," + plane1[2] + "," + plane1[3] + "," + plane1[4] + "," + plane1[5] + "," + plane1[6]);
-                  bufferedWriter.newLine();
-              }
-          bufferedWriter.close();
-          JOptionPane.showMessageDialog(null, "saved data seating");
-      } catch (IOException i) {
-         JOptionPane.showMessageDialog(null, "Error with saving seating");
-      }
+    public void WriteAllPlane(){ 
+      for(int i = 0; i < 12; i++){
+        appendToRandomAccessFile("Seating.txt", plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + ","+ plane[i][6]+ "," );
+      }        
     }
-    
+   
+    /**
+     * Writes in a certain position
+     * @param file
+     * @param position
+     * @param record 
+     */
+  public void writeToRandomAccessFile(String file, int position, String record) { 
+		try { 
+			RandomAccessFile fileStore = new RandomAccessFile(file, "rw"); // read write mode
+			// moves file pointer to position specified 
+			fileStore.seek(position); 
+			// write String to RandomAccessFile 
+			fileStore.writeUTF(record); 
+                   
+			fileStore.close(); 
+			} catch (IOException e) { 
+				JOptionPane.showMessageDialog(null,"Error with writing file");
+		}  
+	} 
+  
+  /**
+   * Writes data to file
+   * @param file
+   * @param record 
+   */
+  public static void appendToRandomAccessFile(String file, String record) { 
+		try { 
+			RandomAccessFile fileStore = new RandomAccessFile(file, "rw"); // read write mode
+			// moves file pointer to position specified 
+			System.out.println("Appending at position " + fileStore.length());
+			fileStore.seek(fileStore.length()); 
+			// write String to RandomAccessFile 
+			fileStore.writeUTF(record); 
+			fileStore.close(); 
+			} catch (IOException e) { 
+				e.printStackTrace(); 
+		}  
+	}
 }
+
+
