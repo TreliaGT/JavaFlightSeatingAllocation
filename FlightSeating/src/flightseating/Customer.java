@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 package flightseating;
-        
-import java.io.Serializable;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+
 
 /**
  *
  * @author Trelia
  */
-public class Customer implements Serializable {
+public class Customer  implements Comparable {
        private final SimpleStringProperty name = new SimpleStringProperty("");
        private final SimpleStringProperty ageGroup = new SimpleStringProperty("");
        private final SimpleStringProperty flightClass = new SimpleStringProperty("");
@@ -133,10 +133,35 @@ public class Customer implements Serializable {
     }
     
     public String getData(){
-        return getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
+        return  getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
                 Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
     }
+
+    public int compareTo(Customer p) {
+        if (p!=null)
+            return this.getName().compareTo(p.getName());
+        else
+            return 1;
+    }
+     
+      
+       @Override
+        public int compareTo(Object o) {
+        Customer p = (Customer) o;
+        return this.getName().compareTo(p.getName());
+        }
+
 }
+
+     
+    
+    
+
+   
+        
+       
+      
+
 
 
 

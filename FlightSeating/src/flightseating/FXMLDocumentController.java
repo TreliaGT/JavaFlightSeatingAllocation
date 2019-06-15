@@ -36,6 +36,7 @@ import java.io.ObjectInputStream;
 import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.transformation.SortedList;
 
 
 /**
@@ -83,6 +84,8 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Customer, String > row;
     @FXML
     private TableColumn<Customer, String> col;
+    @FXML
+    private TextField TxtSearch;
 String plane[][];
  /* String plane[][] ={
           {"Row 1", "*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -101,39 +104,20 @@ String plane[][];
    
     ArrayList<Customer> customer = new ArrayList<Customer>();
           ObservableList<Customer> person;
+   
           
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //WriteAllPlane();
           makePlaneFromFile();
-         makeCustomerFromFile();
-           setCustomerTableView();
+        // makeCustomerFromFile();
+         //  setCustomerTableView();
             setTableView();
             setComboBox();
      
     }  
-    
-    public void makePlaneFromFile(){
-               String fromfile = readFromRandomAccessFile("seating.txt", 0);
-            String[] seat = fromfile.split(",");
-          String seats[][] = {
-              {seat[0], seat[1], seat[2], seat[3], seat[4], seat[5],seat[6]}, //1
-              {seat[7], seat[8], seat[9], seat[10], seat[11], seat[12],seat[13]},//2
-              {seat[14], seat[15], seat[16], seat[17], seat[18], seat[19],seat[20]},//3
-              {seat[21], seat[22], seat[23], seat[24], seat[25], seat[26],seat[27]},//4
-              {seat[28], seat[29], seat[30], seat[31], seat[32], seat[33],seat[34]},//5
-              {seat[35], seat[36], seat[37], seat[38], seat[39], seat[40],seat[41]},//6
-              {seat[42], seat[43], seat[44], seat[45], seat[46], seat[47],seat[48]},//7
-              {seat[49], seat[50], seat[51], seat[52], seat[53], seat[54],seat[55]},//8
-              {seat[56], seat[57], seat[58], seat[59], seat[60], seat[61],seat[62]},//9
-              {seat[63], seat[64], seat[65], seat[66], seat[67], seat[68],seat[69]},//10
-              {seat[70], seat[71], seat[72], seat[73], seat[74], seat[75],seat[76]},//11
-              {seat[77], seat[78], seat[79], seat[80], seat[81], seat[82],seat[83]},//12
-          };
-        plane = seats;
-    }
-    
-    /**
+ 
+     /**
      * Closes the program but also will call the write to file method
      * @param event 
      */
@@ -155,7 +139,7 @@ String plane[][];
        int row = customer.get(I).getRow();
          plane[row][col] = "*";
          customer.remove(I);
-         
+        
          setTableView();
          setCustomerTableView();
     }
@@ -167,6 +151,51 @@ String plane[][];
     @FXML
     private void AddCustomer_click(ActionEvent event) {
         addCustomer();
+    }
+    
+    /**
+     * Search Function for customers
+     * @param event 
+     */
+     @FXML
+    private void Search_click(ActionEvent event) {
+    }
+    
+    /**
+     * Reads all of the seating data in seating.txt
+     */
+    public void makePlaneFromFile(){
+               String fromfile = readFromRandomAccessFile("seating.txt", 0);
+            String[] seat = fromfile.split(",");
+          String seats[][] = {
+              {seat[0], seat[1], seat[2], seat[3], seat[4], seat[5],seat[6]}, //1
+              {seat[7], seat[8], seat[9], seat[10], seat[11], seat[12],seat[13]},//2
+              {seat[14], seat[15], seat[16], seat[17], seat[18], seat[19],seat[20]},//3
+              {seat[21], seat[22], seat[23], seat[24], seat[25], seat[26],seat[27]},//4
+              {seat[28], seat[29], seat[30], seat[31], seat[32], seat[33],seat[34]},//5
+              {seat[35], seat[36], seat[37], seat[38], seat[39], seat[40],seat[41]},//6
+              {seat[42], seat[43], seat[44], seat[45], seat[46], seat[47],seat[48]},//7
+              {seat[49], seat[50], seat[51], seat[52], seat[53], seat[54],seat[55]},//8
+              {seat[56], seat[57], seat[58], seat[59], seat[60], seat[61],seat[62]},//9
+              {seat[63], seat[64], seat[65], seat[66], seat[67], seat[68],seat[69]},//10
+              {seat[70], seat[71], seat[72], seat[73], seat[74], seat[75],seat[76]},//11
+              {seat[77], seat[78], seat[79], seat[80], seat[81], seat[82],seat[83]},//12
+          };
+        plane = seats;
+    }
+    
+       /**
+     * Gets all Customer data from file
+     */
+    public void makeCustomerFromFile(){
+         String fromfile = readFromRandomAccessFile("Customer.txt", 0);
+            String[] seat = fromfile.split(",");
+            int length = seat.length / 9;
+             for (int i=0; i < length; i++)
+             {
+                   customer.add(new Customer(seat[i+1], seat[i+2], seat[i+3] , seat[i+4],Integer.parseInt(seat[i+5]), Integer.parseInt(seat[i+6]), seat[i+7] , seat[i+8]));
+                
+             }
     }
     
     /***
@@ -189,20 +218,12 @@ String plane[][];
         F.setCellValueFactory(data -> data.getValue().PropertyF()); 
         FlightSeatsGrid.setItems(list2);
     }
-    public void makeCustomerFromFile(){
-         String fromfile = readFromRandomAccessFile("Customer.txt", 0);
-            String[] seat = fromfile.split(",");
-            int length = seat.length / 8;
-             for (int i=0; i < length; i++)
-             {
-                   customer.add(new Customer(seat[i], seat[i+1], seat[i+2] , seat[i+3],Integer.parseInt(seat[i+4]), Integer.parseInt(seat[i+5]), seat[i+6] , seat[i+7]));
-             }
-    }
+ 
     /**
      * Sets the customer table view()
      */
     public void setCustomerTableView(){
-       
+    
           ObservableList<Customer> person = FXCollections.observableArrayList(customer);
          Names.setCellValueFactory(data -> data.getValue().PropertyName());
         ageGroup.setCellValueFactory(data -> data.getValue().PropertyAgeGroup());
@@ -293,8 +314,8 @@ String plane[][];
         }
           customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
           //   JOptionPane.showMessageDialog(null,customer.get(0).getData());
-         
-           appendToRandomAccessFile("Customer.txt", customer.get(0).getData());
+        
+          //appendToRandomAccessFile("Customer.txt", customer.get(0).getData());
            
            addSeat(j,k);
         }
@@ -385,6 +406,8 @@ String plane[][];
 				e.printStackTrace(); 
 		}  
 	}
+
+   
 }
 
 

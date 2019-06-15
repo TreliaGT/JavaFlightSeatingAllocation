@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="flightseating.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flightseating.FXMLDocumentController">
  <children>
       <TabPane layoutX="8.0" layoutY="8.0" prefHeight="420.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -54,7 +54,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="customerlist" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="529.0">
+                        <TableView fx:id="customerlist" layoutX="14.0" layoutY="62.0" prefHeight="329.0" prefWidth="529.0">
                            <columns>
                               <TableColumn fx:id="Names" editable="false" prefWidth="97.0" text="Name" />
                               <TableColumn fx:id="ageGroup" prefWidth="84.0" text="ageGroup" />
@@ -65,6 +65,8 @@
                            </columns>
                         </TableView>
                         <Button layoutX="553.0" layoutY="23.0" mnemonicParsing="false" onAction="#DeleteSeat_Click" text=" Delete Customer" />
+                        <TextField fx:id="TxtSearch" layoutX="152.0" layoutY="23.0" prefHeight="25.0" prefWidth="243.0" />
+                        <Button layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#Search_click" prefHeight="25.0" prefWidth="105.0" text="Search Name" />
                      </children>
                   </AnchorPane>
                </content>
