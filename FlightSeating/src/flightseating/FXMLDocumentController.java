@@ -5,17 +5,9 @@
  */
 package flightseating;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,15 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import flightseating.Customer;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.ObjectInputStream;
 import java.io.RandomAccessFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.transformation.SortedList;
 
 
 /**
@@ -110,8 +94,8 @@ String plane[][];
     public void initialize(URL url, ResourceBundle rb) {
         //WriteAllPlane();
           makePlaneFromFile();
-        // makeCustomerFromFile();
-         //  setCustomerTableView();
+         makeCustomerFromFile();
+          setCustomerTableView();
             setTableView();
             setComboBox();
      
@@ -123,8 +107,7 @@ String plane[][];
      */
     @FXML
     private void Close_Click(ActionEvent event) {
-    //writeToRandomAccessFile("Customer.txt", 0, );
-   // writeToRandomAccessFile("Seating.txt", 0, );
+  
        System.exit(0);
     }
     
@@ -151,6 +134,7 @@ String plane[][];
     @FXML
     private void AddCustomer_click(ActionEvent event) {
         addCustomer();
+        WriteAllPlane();
     }
     
     /**
@@ -190,10 +174,10 @@ String plane[][];
     public void makeCustomerFromFile(){
          String fromfile = readFromRandomAccessFile("Customer.txt", 0);
             String[] seat = fromfile.split(",");
-            int length = seat.length / 9;
-             for (int i=0; i < length; i++)
+            int length = seat.length / 8;
+             for (int i = 0 ; i < length; i++)
              {
-                   customer.add(new Customer(seat[i+1], seat[i+2], seat[i+3] , seat[i+4],Integer.parseInt(seat[i+5]), Integer.parseInt(seat[i+6]), seat[i+7] , seat[i+8]));
+                   customer.add(new Customer(seat[i], seat[i + 1], seat[i + 2], seat[i + 3],Integer.parseInt(seat[i + 4]), Integer.parseInt(seat[i + 5]), seat[i + 6] , seat[i + 7]));
                 
              }
     }
@@ -314,8 +298,8 @@ String plane[][];
         }
           customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), j , k , plane[j][0], A));
           //   JOptionPane.showMessageDialog(null,customer.get(0).getData());
-        
-          //appendToRandomAccessFile("Customer.txt", customer.get(0).getData());
+        int length = customer.size() - 1;
+         appendToRandomAccessFile("Customer.txt", customer.get(length).getData());
            
            addSeat(j,k);
         }
@@ -364,7 +348,7 @@ String plane[][];
      */
     public void WriteAllPlane(){ 
       for(int i = 0; i < 12; i++){
-        appendToRandomAccessFile("Seating.txt", plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + ","+ plane[i][6]+ "," );
+       //appendToRandomAccessFile("Seating.txt", plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + ","+ plane[i][6]+ "," );
       }        
     }
    
