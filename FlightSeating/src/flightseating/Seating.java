@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author V244682
  */
 public class Seating {
-    private final SimpleStringProperty rows  = new SimpleStringProperty("");
+
     private final SimpleStringProperty A  = new SimpleStringProperty("");
     private final SimpleStringProperty B  = new SimpleStringProperty("");
     private final SimpleStringProperty C  = new SimpleStringProperty("");
@@ -20,8 +20,8 @@ public class Seating {
     private final SimpleStringProperty E = new SimpleStringProperty("");
     private final SimpleStringProperty F  = new SimpleStringProperty("");
 
-    public Seating(String rows, String A, String B, String C, String D, String E, String F) {
-         this.rows.set(rows);
+    public Seating( String A, String B, String C, String D, String E, String F) {
+         
          this.A.set(A);
          this.B.set(B);
          this.C.set(C);
@@ -31,18 +31,7 @@ public class Seating {
     }
 
     //Setters and getters
-    public SimpleStringProperty PropertyRows() {
-        return rows;
-    }
 
-    public final void setRows(String rows) {
-         this.rows.set(rows);
-    }
-    
-    public String getRows() {
-        return rows.get();
-    }
-    
     public SimpleStringProperty PropertyA() {
         return A;
     }
