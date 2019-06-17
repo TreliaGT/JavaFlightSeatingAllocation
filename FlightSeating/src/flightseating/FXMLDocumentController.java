@@ -107,7 +107,6 @@ String plane[][];
      */
     @FXML
     private void Close_Click(ActionEvent event) {
-  
        System.exit(0);
     }
     
@@ -348,7 +347,7 @@ String plane[][];
      */
     public void WriteAllPlane(){ 
       for(int i = 0; i < 12; i++){
-       //appendToRandomAccessFile("Seating.txt", plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + ","+ plane[i][6]+ "," );
+       appendToRandomAccessFile("Seating.txt", plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + ","+ plane[i][6]+ "," );
       }        
     }
    
