@@ -6,25 +6,23 @@
 package flightseating;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Trelia
  */
-public class RandomAcess {
-    
-     /**
+public interface RandomAccessFile {
+      /**
      * Writes customer list to file
      * @param file
      * @param position
      * @return 
      */
-    public String readFromRandomAccessFile(String file,int position) {
+    public static String readFromRandomAccessFile(String file,int position) {
         String record = null; 
 		try { 
-			RandomAccessFile fileStore = new RandomAccessFile(file, "r"); // read mode
+			java.io.RandomAccessFile fileStore = new java.io.RandomAccessFile(file, "r"); // read mode
 			// moves file pointer to position specified 
 			fileStore.seek(position); 
 			// read String from RandomAccessFile 
@@ -45,9 +43,9 @@ public class RandomAcess {
      * @param position
      * @param record 
      */
-  public void writeToRandomAccessFile(String file, int position, String record) { 
+  public static void writeToRandomAccessFile(String file, int position, String record) { 
 		try { 
-			RandomAccessFile fileStore = new RandomAccessFile(file, "rw"); // read write mode
+			java.io.RandomAccessFile fileStore = new java.io.RandomAccessFile(file, "rw"); // read write mode
 			// moves file pointer to position specified 
 			fileStore.seek(position); 
 			// write String to RandomAccessFile 
@@ -66,7 +64,7 @@ public class RandomAcess {
    */
   public static void appendToRandomAccessFile(String file, String record) { 
 		try { 
-			RandomAccessFile fileStore = new RandomAccessFile(file, "rw"); // read write mode
+			java.io.RandomAccessFile fileStore = new java.io.RandomAccessFile(file, "rw"); // read write mode
 			// moves file pointer to position specified 
 			System.out.println("Appending at position " + fileStore.length());
 			fileStore.seek(fileStore.length()); 
