@@ -5,6 +5,7 @@
  */
 package flightseating;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -77,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<Customer, String> col;
     @FXML
     private TextField TxtSearch;
-String plane[][];
+String plane[][] = new String[12][6];
 // String plane[][] ={
 //        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
 //        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
@@ -100,6 +101,7 @@ String plane[][];
           
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        WriteAllPlane();
         makePlaneFromFile();
         makeCustomerFromFile();
         setSeatingTableView(); //sets up the seating view
@@ -111,7 +113,14 @@ String plane[][];
      * Reads all of the seating data in seating.txt
      */
     public void makePlaneFromFile(){
-               String fromfile = RandomAccess.readFromRandomAccessFile("Seating.txt", 0);
+//            String fromfile = RandomAccess.readFromRandomAccessFile("Seating.txt", 0);
+            for (int row = 0; row < 12; row++) {
+                for (int col = 0; col < 6; col++) {
+                    int location = 4*(6*row + (col));
+                    plane[row][col] = String.valueOf(RandomAccess.readFromRandomAccessFile("Seating.txt", location));
+                    }
+            }
+            /*
             String[] seat = fromfile.split(",");
           String seats[][] = {
               {seat[0], seat[1], seat[2], seat[3], seat[4], seat[5]}, //1
@@ -128,16 +137,20 @@ String plane[][];
               {seat[66], seat[67],seat[68],seat[69], seat[70], seat[71]},//12
           };
         plane = seats;
+            */
     }
     
     public void makeCustomerFromFile(){
       
          try {
-        Scanner inFile = new Scanner(new FileReader("Customer.txt"));
-        while(inFile.hasNextLine()){
-            customer.add(new Customer(inFile.next(),inFile.next(), inFile.next(),inFile.next(),inFile.nextInt(),inFile.nextInt(), inFile.next(), inFile.next()));
+         String line;
+         BufferedReader inFile = new BufferedReader(new FileReader("Customer.txt"));
+        while((line = inFile.readLine()) != null){
+            String[] customerInfo = line.split(",");
+            customer.add(new Customer(customerInfo[0],customerInfo[1], customerInfo[2],customerInfo[3],Integer.parseInt(customerInfo[4]),Integer.parseInt(customerInfo[5]), customerInfo[6], customerInfo[7]));
         }
         inFile.close(); 
+        setCustomerTableView();
       } catch (IOException i) {
           JOptionPane.showMessageDialog(null, "There was an error");
       }
@@ -302,10 +315,10 @@ String plane[][];
      */
     public void getSeat(int cRight, int cLeft){
         for (int i = 0; i < plane.length; i++){
-            if(" * ".equals(plane[i][cRight])){
+            if("*".equals(plane[i][cRight])){
                  AddCustomer(i,cRight);
                  break;
-            }else if(" * ".equals(plane[i][cLeft])){
+            }else if("*".equals(plane[i][cLeft])){
               AddCustomer(i,cLeft);
                  break;
             }else{

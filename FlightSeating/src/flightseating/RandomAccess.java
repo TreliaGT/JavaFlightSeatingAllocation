@@ -22,19 +22,19 @@ public class RandomAccess {
      * @param position
      * @return 
      */
-    public static String readFromRandomAccessFile(String file,int position) {
-       String record = ""; 
+    public static char readFromRandomAccessFile(String file,int position) {
+       char record = 'E'; 
 		try { 
 			RandomAccessFile fileStore = new RandomAccessFile(file, "r"); // read mode
 			// moves file pointer to position specified 
 			fileStore.seek(position); 
 			// read String from RandomAccessFile 
 			//record = fileStore.readUTF(); 
-			record = fileStore.readLine();
-                      //record = fileStore.readChar();
+//			record = fileStore.readLine();
+                      record = fileStore.readChar();
 			fileStore.close(); 
 			} catch (IOException e) { 
-				JOptionPane.showMessageDialog(null,"Error with reading file"); 
+				//JOptionPane.showMessageDialog(null,"Error with reading file"); 
 			} 
 		return record; 
 }
