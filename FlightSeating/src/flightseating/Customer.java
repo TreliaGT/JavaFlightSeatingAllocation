@@ -135,7 +135,7 @@ public class Customer implements java.io.Serializable {
     
     public String getData(){
         return  getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
-                Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter();
+                Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
     }
   
   public static Comparator<Customer> NameComparator = new Comparator<Customer>() {
