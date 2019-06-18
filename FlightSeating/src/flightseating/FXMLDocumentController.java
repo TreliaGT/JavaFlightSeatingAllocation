@@ -306,7 +306,9 @@ String plane[][] = new String[12][6];
               AddCustomer(i,cLeft);
                  break;
             }else{
-                 JOptionPane.showMessageDialog(null,"Sorry your SeatType isn't free");
+                 if (plane.length == (i + 1)){
+                      JOptionPane.showMessageDialog(null,"please choose another seat");
+                 }
             }
         }
     }
