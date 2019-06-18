@@ -5,7 +5,6 @@
  */
 package flightseating;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -19,8 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
-import flightseating.Customer;
-import java.io.RandomAccessFile;
+
 
 
 /**
@@ -87,11 +85,13 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Customer> customer = new ArrayList<Customer>();
           ObservableList<Customer> person;
    int RowNumber;
+
           
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setSeatingTableView(); //sets up the seating view
         setComboBox(); //Sets up all combo boxes
+         WriteAllPlane();
     }  
  
      /**
@@ -100,6 +100,7 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void Close_Click(ActionEvent event) {
+       WriteAllPlane();
        System.exit(0);
     }
     
@@ -253,7 +254,8 @@ public class FXMLDocumentController implements Initializable {
         }
          
    customer.add(new Customer(txtName.getText(), AgeComboBox.getValue(), ClassComboBox.getValue(),SeatTypeCombo.getValue(), row , Column , "Row " + Integer.toString(row + 1), A));
-           
+            
+      
            addSeat(row,Column);
         }
         
@@ -273,7 +275,19 @@ public class FXMLDocumentController implements Initializable {
         setCustomerTableView();
     }
     
-    
+      /**
+     * writes all of the planes data
+     */
+    public void WriteAllPlane(){ 
+      for(int i = 0; i < plane.length; i++){
+        RandomAccess.writeToRandomAccessFile("Seating.txt", 0 ,plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + "," );
+         
+        //appendToRandomAccessFile
+      }       
+      for(int j=0 ; j < customer.size(); j++){
+          RandomAccess.writeToRandomAccessFile("Customer.txt" , 0 , customer.get(j).getData());
+      }
+    }
 }
 
 
