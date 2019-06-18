@@ -169,8 +169,6 @@ public class FXMLDocumentController implements Initializable {
         {
            //Collections.sort(customer, Customer.NameComparator);
         customerlist.getSelectionModel().select(mid);
-          
-          JOptionPane.showMessageDialog(null,"Customer was found");
         }
         else
         {
