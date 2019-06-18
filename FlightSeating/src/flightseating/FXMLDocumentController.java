@@ -7,6 +7,7 @@ package flightseating;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -165,7 +166,9 @@ public class FXMLDocumentController implements Initializable {
 
         if (found)
         {
+           //Collections.sort(customer, Customer.NameComparator);
           setCustomerTableView();
+          JOptionPane.showMessageDialog(null,"Customer was found");
         }
         else
         {
@@ -198,7 +201,7 @@ public class FXMLDocumentController implements Initializable {
      * Sets the customer table view()
      */
     public void setCustomerTableView(){
-    
+     Collections.sort(customer, Customer.NameComparator);
           ObservableList<Customer> person = FXCollections.observableArrayList(customer);
          Names.setCellValueFactory(data -> data.getValue().PropertyName());
         ageGroup.setCellValueFactory(data -> data.getValue().PropertyAgeGroup());

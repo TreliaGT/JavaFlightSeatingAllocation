@@ -5,6 +5,7 @@
  */
 package flightseating;
 
+import java.util.Comparator;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -13,7 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Trelia
  */
-public class Customer implements java.io.Serializable , Comparable<Customer>{
+public class Customer implements java.io.Serializable {
        private final SimpleStringProperty name = new SimpleStringProperty("");
        private final SimpleStringProperty ageGroup = new SimpleStringProperty("");
        private final SimpleStringProperty flightClass = new SimpleStringProperty("");
@@ -136,12 +137,19 @@ public class Customer implements java.io.Serializable , Comparable<Customer>{
         return  getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
                 Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
     }
-
-
-    
-
   
- 
+  public static Comparator<Customer> NameComparator = new Comparator<Customer>() {
+
+	public int compare(Customer s1, Customer s2) {
+	   String Customer1 = s1.getName().toUpperCase();
+	   String Customer2 = s2.getName().toUpperCase();
+
+	   //ascending order
+	   return Customer1.compareTo(Customer2);
+
+	   //descending order
+	   //return StudentName2.compareTo(StudentName1);
+    }};
 
 }
 
