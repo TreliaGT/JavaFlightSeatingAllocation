@@ -106,7 +106,6 @@ String plane[][] = new String[12][6];
         makeCustomerFromFile();
         setSeatingTableView(); //sets up the seating view
        setComboBox(); //Sets up all combo boxes
-        // WriteAllPlane();
     }  
     
    /**
@@ -120,26 +119,11 @@ String plane[][] = new String[12][6];
                     plane[row][col] = String.valueOf(RandomAccess.readFromRandomAccessFile("Seating.txt", location));
                     }
             }
-            /*
-            String[] seat = fromfile.split(",");
-          String seats[][] = {
-              {seat[0], seat[1], seat[2], seat[3], seat[4], seat[5]}, //1
-              {seat[6], seat[7], seat[8], seat[9], seat[10], seat[11]},//2
-              {seat[12],seat[13],seat[14], seat[15], seat[16], seat[17]},//3
-              {seat[18], seat[19] ,seat[20],seat[21], seat[22], seat[23]},//4
-              {seat[24],seat[25], seat[26],seat[27],seat[28], seat[29]},//5
-              {seat[30], seat[31], seat[32], seat[33],seat[34],seat[35]},//6
-              {seat[36], seat[37], seat[38], seat[39], seat[40],seat[41]},//7
-              {seat[42], seat[43], seat[44], seat[45], seat[46], seat[47]},//8
-              {seat[48],seat[49], seat[50], seat[51], seat[52], seat[53]},//9
-              {seat[54],seat[55],seat[56], seat[57], seat[58], seat[59]},//10
-              {seat[60], seat[61],seat[62],seat[63], seat[64], seat[65]},//11
-              {seat[66], seat[67],seat[68],seat[69], seat[70], seat[71]},//12
-          };
-        plane = seats;
-            */
     }
     
+    /**
+     * Reads the customer data in Customer.txt
+     */
     public void makeCustomerFromFile(){
       
          try {

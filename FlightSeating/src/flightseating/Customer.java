@@ -133,11 +133,18 @@ public class Customer implements java.io.Serializable {
         return ColLetter.get();
     }
     
+    /**
+     * Turns the all the data into a string format 
+     * @return 
+     */
     public String getData(){
         return  getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
                 Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
     }
   
+    /**
+     * able to sort the customers arraylist into Alphabetical order
+     */
   public static Comparator<Customer> NameComparator = new Comparator<Customer>() {
 
 	public int compare(Customer s1, Customer s2) {

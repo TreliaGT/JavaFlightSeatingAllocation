@@ -16,9 +16,9 @@
         <tabs>
           <Tab text="Plane Seats">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="391.0" prefWidth="395.0">
                      <children>
-                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="529.0">
+                        <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="302.0">
                           <columns>
                             <TableColumn fx:id="A" prefWidth="50.0" text="A" />
                               <TableColumn fx:id="B" minWidth="50.0" prefWidth="50.0" text="B" />
@@ -34,7 +34,7 @@
           </Tab>
           <Tab text="New Customer">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="675.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="391.0" prefWidth="319.0">
                      <children>
                         <TextField fx:id="txtName" layoutX="120.0" layoutY="14.0" />
                         <ComboBox fx:id="AgeComboBox" layoutX="120.0" layoutY="67.0" prefWidth="150.0" />
@@ -72,6 +72,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="583.0" layoutY="428.0" mnemonicParsing="false" onAction="#Close_Click" text="Close Program" />
+      <Button layoutX="575.0" layoutY="419.0" mnemonicParsing="false" onAction="#Close_Click" text="Close Program" />
+      <Label layoutX="8.0" layoutY="423.0" text="Please make sure to press the close program button when closing the application, Thank you" />
     </children>
 </AnchorPane>
