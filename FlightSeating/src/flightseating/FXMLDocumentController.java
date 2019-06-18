@@ -168,7 +168,7 @@ public class FXMLDocumentController implements Initializable {
         if (found)
         {
            //Collections.sort(customer, Customer.NameComparator);
-        customerlist.getSelectionModel().select(mid);
+            customerlist.getSelectionModel().select(mid);
         }
         else
         {
