@@ -20,7 +20,6 @@
                      <children>
                         <TableView fx:id="FlightSeatsGrid" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="529.0">
                           <columns>
-                              <TableColumn fx:id="rows" editable="false" prefWidth="75.0" text="Rows" />
                             <TableColumn fx:id="A" prefWidth="50.0" text="A" />
                               <TableColumn fx:id="B" minWidth="50.0" prefWidth="50.0" text="B" />
                               <TableColumn fx:id="C" prefWidth="50.0" text="C" />
