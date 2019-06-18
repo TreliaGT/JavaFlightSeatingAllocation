@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -140,7 +141,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-     * Search
+     * Binary Search function
      * @param line
      */
     public void binarySearch(String line)
@@ -167,7 +168,8 @@ public class FXMLDocumentController implements Initializable {
         if (found)
         {
            //Collections.sort(customer, Customer.NameComparator);
-          setCustomerTableView();
+        customerlist.getSelectionModel().select(mid);
+          
           JOptionPane.showMessageDialog(null,"Customer was found");
         }
         else
