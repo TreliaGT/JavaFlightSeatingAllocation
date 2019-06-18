@@ -5,6 +5,7 @@
  */
 package flightseating;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,18 +71,18 @@ public class FXMLDocumentController implements Initializable {
     private TextField TxtSearch;
 //String plane[][];
  String plane[][] ={
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-         {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
-          {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
+        {"*" ,"*" ,"*" ,"*" ,"*" , "*"},
     };
   
     ArrayList<Customer> customer = new ArrayList<Customer>();
@@ -117,6 +118,9 @@ public class FXMLDocumentController implements Initializable {
        int row = customer.get(I).getRow();
          plane[row][col] = "*";
          customer.remove(I);
+         int location = 4*(6*row + (col));
+         RandomAccess.writeToRandomAccessFile("Seating.txt", location,"*");
+         
       
      setSeatingTableView();
      setCustomerTableView();
@@ -305,11 +309,17 @@ public class FXMLDocumentController implements Initializable {
      * @param Column
      */
     public void addSeat(int row, int Column){
+         int location = 4*(6*row + (Column));
+         
         if("Adult".equals(AgeComboBox.getValue())){
             plane[row][Column] = "A"; 
+            
+             RandomAccess.writeToRandomAccessFile("Seating.txt", location,"A");
           
         }else{
             plane[row][Column] = "C";
+            
+            RandomAccess.writeToRandomAccessFile("Seating.txt", location,"C");
         }
         setSeatingTableView();
         setCustomerTableView();
@@ -319,11 +329,23 @@ public class FXMLDocumentController implements Initializable {
      * writes all of the planes data
      */
     public void WriteAllPlane(){ 
-      for(int i = 0; i < plane.length; i++){
-        RandomAccess.writeToRandomAccessFile("Seating.txt", 0 ,plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + "," );
-         
-        //appendToRandomAccessFile
-      }       
+//      for(int i = 0; i < plane.length; i++){
+//        RandomAccess.writeToRandomAccessFile("Seating.txt", 0 ,plane[i][0] + ","+ plane[i][1]  + ","+ plane[i][2]  + ","+ plane[i][3] + ","+ plane[i][4]  + ","+ plane[i][5]  + "," );
+//         
+//        //appendToRandomAccessFile
+//      }
+    String seatFile = "Seating.txt";
+    File file = new File(seatFile);
+    if(!file.exists()){   
+        String result = "";
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 6; j++) {
+                result += "*,";
+                 }
+            }
+         RandomAccess.writeToRandomAccessFile(seatFile, 0, result);
+        }
+    
       for(int j=0 ; j < customer.size(); j++){
           RandomAccess.writeToRandomAccessFile("Customer.txt" , 0 , customer.get(j).getData());
       }

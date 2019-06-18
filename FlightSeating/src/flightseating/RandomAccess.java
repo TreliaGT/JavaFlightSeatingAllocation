@@ -22,8 +22,8 @@ public class RandomAccess {
      * @param position
      * @return 
      */
-    public static String readFromRandomAccessFile(String file,int position) {
-        String record = null; 
+    public static char readFromRandomAccessFile(String file,int position) {
+        char record = 'E'; 
 		try { 
 			RandomAccessFile fileStore = new RandomAccessFile(file, "r"); // read mode
 			// moves file pointer to position specified 
@@ -31,7 +31,7 @@ public class RandomAccess {
 			// read String from RandomAccessFile 
 			//record = fileStore.readUTF(); 
 			//record = fileStore.readLine();
-                       record = fileStore.readLine();
+                       record = fileStore.readChar();
 			fileStore.close(); 
 			} catch (IOException e) { 
 				JOptionPane.showMessageDialog(null,"Error with reading file"); 
@@ -51,7 +51,7 @@ public class RandomAccess {
 			// moves file pointer to position specified 
 			fileStore.seek(position); 
 			// write String to RandomAccessFile 
-			fileStore.writeUTF(record); 
+			fileStore.writeChars(record); 
                    
 			fileStore.close(); 
 			} catch (IOException e) { 
@@ -71,7 +71,7 @@ public class RandomAccess {
 			System.out.println("Appending at position " + fileStore.length());
 			fileStore.seek(fileStore.length()); 
 			// write String to RandomAccessFile 
-			fileStore.writeUTF(record); 
+			fileStore.writeChars(record); 
 			fileStore.close(); 
 			} catch (IOException e) { 
 				e.printStackTrace(); 
