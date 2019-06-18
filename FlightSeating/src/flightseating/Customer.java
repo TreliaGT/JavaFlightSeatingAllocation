@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Trelia
  */
-public class Customer implements java.io.Serializable{
+public class Customer implements java.io.Serializable , Comparable<Customer>{
        private final SimpleStringProperty name = new SimpleStringProperty("");
        private final SimpleStringProperty ageGroup = new SimpleStringProperty("");
        private final SimpleStringProperty flightClass = new SimpleStringProperty("");
@@ -136,8 +136,12 @@ public class Customer implements java.io.Serializable{
         return  getName() + "," + getAgeGroup() + ","+ getFlightClass() + ","+ getPerferedSeat() + ","+ Integer.toString(getRow()) + ","+
                 Integer.toString(getCol())+ "," + getRowNum() + "," + getColLetter() + ",";
     }
+
+
     
-    
+
+  
+ 
 
 }
 

@@ -135,9 +135,46 @@ public class FXMLDocumentController implements Initializable {
      */
      @FXML
     private void Search_click(ActionEvent event) {
+        binarySearch(TxtSearch.getText());
     }
     
- /***
+    /**
+     * Search
+     * @param line
+     */
+    public void binarySearch(String line)
+     {
+       
+        int first = 0;
+        int last = customer.size();
+        int mid=0;
+        boolean found = false;
+
+        while (first <= last && !found)
+        {
+            mid = (first + last) / 2;
+
+            if (customer.get(mid).getName().equals(line)||customer.get(mid).getName().compareTo(line) == 0) // cannot use == for string comparisons
+                    
+                found = true;
+            else if (customer.get(mid).getName().compareTo(line) > 0) 
+                last = mid - 1;
+            else
+                first = mid + 1;
+        }
+
+        if (found)
+        {
+          setCustomerTableView();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Sorry Customer wasn't found");
+        }
+            
+     }
+    
+    /***
      * Adds information to a table view
      */
     public void setSeatingTableView(){
@@ -288,6 +325,9 @@ public class FXMLDocumentController implements Initializable {
           RandomAccess.writeToRandomAccessFile("Customer.txt" , 0 , customer.get(j).getData());
       }
     }
+    
+ 
+
 }
 
 
