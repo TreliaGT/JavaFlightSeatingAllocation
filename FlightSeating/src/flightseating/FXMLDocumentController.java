@@ -101,6 +101,7 @@ String plane[][];
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         makePlaneFromFile();
+        makeCustomerFromFile();
         setSeatingTableView(); //sets up the seating view
        setComboBox(); //Sets up all combo boxes
         // WriteAllPlane();
@@ -130,7 +131,7 @@ String plane[][];
     }
     
     public void makeCustomerFromFile(){
-        String data;
+      
          try {
         Scanner inFile = new Scanner(new FileReader("Customer.txt"));
         while(inFile.hasNextLine()){
